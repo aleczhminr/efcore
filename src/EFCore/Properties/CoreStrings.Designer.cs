@@ -2539,7 +2539,7 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => GetString("OwnedEntitiesCannotBeTrackedWithoutTheirOwner");
 
         /// <summary>
-        ///     Calling {visitMethodName} is not allowed. Visit expression manually for relevant part.
+        ///     Calling '{visitMethodName}' is not allowed. Visit expression manually for relevant part.
         /// </summary>
         public static string VisitIsNotAllowed([CanBeNull] object visitMethodName)
             => string.Format(
@@ -2609,10 +2609,10 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
         /// <summary>
         ///     Translation of method '{declaringTypeName}.{methodName}' failed. If you are trying to map your custom function, see https://go.microsoft.com/fwlink/?linkid=2132413 for more information.
         /// </summary>
-        public static string QueryUnableToTranslateMethod([CanBeNull] object methodName, [CanBeNull] object declaringTypeName)
+        public static string QueryUnableToTranslateMethod([CanBeNull] object declaringTypeName, [CanBeNull] object methodName)
             => string.Format(
-                GetString("QueryUnableToTranslateMethod", nameof(methodName), nameof(declaringTypeName)),
-                methodName, declaringTypeName);
+                GetString("QueryUnableToTranslateMethod", nameof(declaringTypeName), nameof(methodName)),
+                declaringTypeName, methodName);
 
         /// <summary>
         ///     Invalid {state} encountered.
@@ -2721,6 +2721,14 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             => string.Format(
                 GetString("UnnamedIndexDefinedOnNonExistentProperty", nameof(entityType), nameof(indexPropertyList), nameof(propertyName)),
                 entityType, indexPropertyList, propertyName);
+
+        /// <summary>
+        ///     Unhandled 'INavigationBase' of type '{type}'.
+        /// </summary>
+        public static string UnhandledNavigationBase([CanBeNull] object type)
+            => string.Format(
+                GetString("UnhandledNavigationBase", nameof(type)),
+                type);
 
         private static string GetString(string name, params string[] formatterNames)
         {
